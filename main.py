@@ -17,7 +17,13 @@ def connect_database():
     return psycopg2.connect(url)
 @app.get("/")
 def display(request: Request, error: str = ""):
-    return templates.TemplateResponse("login.html",{"request":request,"error":error})
+    try:
+        return templates.TemplateResponse("login.html", {
+            "request": request,
+            "error": error
+        })
+    except Exception as e:
+        return {"template_error": str(e)}
 @app.post("/")
 def getdata(request:Request,UserName:str=Form(...),PassWord:str=Form(...),UserType:str=Form(...),Balance:Union[float,str,None]=Form(None)):
     if Balance == "" or Balance is None:
