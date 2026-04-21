@@ -11,9 +11,11 @@ app.add_middleware(SessionMiddleware,secret_key="kaviya")
 templates=Jinja2Templates(directory="templates")
 app.mount("/static",StaticFiles(directory="static"),name="static")
 import os
-
 def connect_database():
-    return psycopg2.connect(os.getenv("DATABASE_URL"))
+    return psycopg2.connect(
+        os.getenv("DATABASE_URL"),
+        sslmode="require"
+    )
 @app.get("/")
 def display(request:Request,error:str=""):
     return templates.TemplateResponse("login.html",{"request":request,"error":error})
