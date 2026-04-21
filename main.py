@@ -10,12 +10,13 @@ app=FastAPI()
 app.add_middleware(SessionMiddleware,secret_key="kaviya")
 import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-templates = Jinja2Templates(directory=os.path.join(BASE_DIR, "templates"))
+templates = Jinja2Templates(directory="templates")
 app.mount("/static",StaticFiles(directory="static"),name="static")
 def connect_database():
-    return psycopg2.connect(os.environ["DATABASE_URL"])
+    url = DATABASE_URL.replace("postgres://", "postgresql://")
+    return psycopg2.connect(url)
 @app.get("/")
-def display(request:Request,error:str=""):
+def display(request: Request, error: str = ""):
     return templates.TemplateResponse("login.html",{"request":request,"error":error})
 @app.post("/")
 def getdata(request:Request,UserName:str=Form(...),PassWord:str=Form(...),UserType:str=Form(...),Balance:Union[float,str,None]=Form(None)):
