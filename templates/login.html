@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    <link rel="icon" href="/static/imageicon.png">
+    <style>
+        .stylish-btn{
+           background: linear-gradient(to right,pink,blueviolet);
+           color: whitesmoke;
+           border: none;
+           padding:12px 24px;
+           margin:10px 0;
+           border-radius: 30px;
+           font-size: 16px;
+           cursor: pointer;
+           transition: all 0.3s ease;
+           box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .stylish-btn:hover{
+            background: linear-gradient(to right,pink,blueviolet);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body style="background-image: url('/static/loginbg.jpg'); background-size: cover;">
+   <center>
+    <h1 style="color: azure;text-decoration: wavy;text-shadow: 10cm;">Welcome</h1>
+    <img src="/static/loginimg.png" width="250" height="250">
+    <form  method="post" action="/">
+        <table>
+            <tr>
+                <td style="color: aliceblue;">UserName</td>
+                <td><input type="text" name="UserName" placeholder="enter username" required></td>
+            </tr>
+            <tr>
+                <td style="color: aliceblue;">PassWord</td>
+                <td><input type="password" name="PassWord" placeholder="enter password" required></td>
+            </tr>
+            <tr>
+                <td style="color: aliceblue;">UserType</td>
+                <td><input type="text" name="UserType" placeholder="admin/investor" required></td>
+            </tr>
+             <tr>
+                <td style="color: aliceblue;">Balance</td>
+                <td><input type="number" name="Balance" placeholder="enter Balance"></td>
+            </tr>
+            <tr>
+                <td><button onclick="window.location.href='/'" class="stylish-btn">Refresh</button></td>
+                <td><button type="submit" class="stylish-btn ">Login</button></td>
+            </tr>
+        </table>
+
+    </form>
+    {% if error %}
+      <p style="color: black;">{{error}}</p>
+    {% endif %}
+   </center>
+    
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Stocks</title>
+    <link rel="icon" href="/static/stockicon.png">
+    <style>
+    table {
+        border-collapse: collapse;
+        width: 70%;
+        margin: 20px auto;
+    }
+    th, td {
+        border: 1px solid #333;
+        padding: 10px;
+        text-align: center;
+    }
+    th {
+        background-color: #3e7cb1;
+        color: white;
+    }
+    .stylish-btn{
+           background: linear-gradient(to right,pink,blueviolet);
+           color: whitesmoke;
+           border: none;
+           padding:12px 24px;
+           margin:10px 0;
+           border-radius: 30px;
+           font-size: 16px;
+           cursor: pointer;
+           transition: all 0.3s ease;
+           box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .stylish-btn:hover{
+            background: linear-gradient(to right,pink,blueviolet);
+            transform: scale(1.05);
+        }
+</style>
+</head>
+<body  style="background-image: url('/static/usersbg.jpg');background-size:cover;">
+    <h1 style="text-align: center;">Stocks</h1>
+    <div style="overflow-y: auto; max-height: 380px; margin: 20px; width: 75%; margin-left: auto; margin-right: auto;">
+    <table>
+        <tr>
+            <th>Symbol</th>
+            <th>Company</th>
+            <th>Price(per share)</th>
+            <th>Available Shares</th>
+            <th>Sector</th>
+            <th>Rating</th>
+        </tr>
+        {% for st in stocks %}
+        <tr>
+            <td>{{st["symbol"] }}</td>
+            <td>{{st["company"]}}</td>
+            <td>{{st["price(per share)"]}}</td>
+            <td>{{st["available_shares"]}}</td>
+            <td>{{st["sector"]}}</td>
+            <td>{{st["rating"]}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
+    <div style="text-align: left ;">
+    <a href="/admin"><button class="stylish-btn">Back</button></a>
+    </div>
+    <div style="text-align: center;">
+    <a href="/admin/addstock"><button class="stylish-btn">ADD</button></a>
+    <a href="/delete_stock"><button class="stylish-btn">REMOVE</button></a>
+    <button onclick="window.location.href='/admin/viewusers'" class="stylish-btn">Refresh</button>
+    <hr>
+</div>
+
+</body>
+</html>

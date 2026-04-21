@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Available Stocks</title>
+    <style>
+    table {
+        border-collapse: collapse;
+        width: 70%;
+        margin: 20px auto;
+    }
+    th, td {
+        border: 1px solid #333;
+        padding: 10px;
+        text-align: center;
+    }
+    th {
+        background-color: #3e7cb1;
+        color: white;
+    }
+    .stylish-btn {
+        background: linear-gradient(to right, rgb(107, 182, 199), rgb(127, 219, 253));
+        color: whitesmoke;
+        border: none;
+        padding: 12px 24px;
+        margin: 10px 0;
+        border-radius: 30px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .stylish-btn:hover {
+        background: linear-gradient(to right, rgb(103, 231, 224), rgb(110, 206, 221));
+        transform: scale(1.05);
+    }
+
+    .form-container {
+        width: 50%;
+        margin: 0 auto;
+        margin-top: 20px;
+        text-align: left;
+        margin-left: -80px;
+    }
+    </style>
+</head>
+<body  style="background-image: url('/static/existinginvestorbg.jpg'); background-size: cover;">
+    <h1 style="text-align: center;">Stocks</h1>
+
+   
+    <div style="display: flex; justify-content: center; align-items: flex-start; gap: 60px; padding: 20px; flex-wrap: wrap;">
+
+        
+        <div class="form-container" style="flex: 1; max-width: 400px;">
+            <form id="buy-form">
+                <table>
+                    <tr>
+                        <td><label for="symbol">Symbol:</label></td>
+                        <td>
+                            <input type="text" name="symbol" list="stock_symbols" required>
+                            <datalist id="stock_symbols">
+                                {% for st in stocks %}
+                                    <option value="{{ st.symbol }}">
+                                {% endfor %}
+                            </datalist>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="num_shares">Number of shares:</label></td>
+                        <td><input type="number" name="num_shares" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="company">Company:</label></td>
+                        <td>
+                            <input type="text" name="company" list="company_list" required>
+                            <datalist id="company_list">
+                                {% for c in stocks %}
+                                    <option value="{{ c.company }}">
+                                {% endfor %}
+                            </datalist>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center;">
+                            <button type="submit" class="stylish-btn">Buy</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+       
+        <div style="flex: 2; overflow-y: auto; max-height: 400px;">
+            <table>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Company</th>
+                    <th>Price(per share)</th>
+                    <th>Available Shares</th>
+                    <th>Sector</th>
+                    <th>Rating</th>
+                </tr>
+                {% for st in stocks %}
+                <tr>
+                    <td>{{ st["symbol"] }}</td>
+                    <td>{{ st["company"] }}</td>
+                    <td>{{ st["price(per share)"] }}</td>
+                    <td>{{ st["available_shares"] }}</td>
+                    <td>{{ st["sector"] }}</td>
+                    <td>{{ st["rating"] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    <div style="text-align: center;">
+        <a href="/investor/exist"><button class="stylish-btn">Back</button></a>
+        <button onclick="window.location.reload()" class="stylish-btn">Refresh</button>
+        <hr>
+    </div>
+
+    <script>
+    document.getElementById("buy-form").addEventListener("submit", function(event) {
+        event.preventDefault(); 
+        const formData = new FormData(this);
+
+        fetch("/buy", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                alert(data.message);
+                window.location.reload(); 
+            } else if (data.error) {
+                alert("Error: " + data.error);
+            }
+        })
+        .catch(error => {
+            alert("Something went wrong!");
+            console.error(error);
+        });
+    });
+    </script>
+</body>
+</html>

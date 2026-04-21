@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin</title>
+    <link rel="icon" href="/static/adminicon.png">
+    <style>
+        .stylish-btn{
+           background: linear-gradient(to right,#667eea,#764ba2);
+           color:white;
+           border: none;
+           padding: 12px 24px;
+           margin: 10px 0;
+           border-radius: 30px;
+           font-size: 16px;
+           font-weight: bold;
+           text-decoration: none;
+           cursor: pointer;
+           transition: all 0.3s ease;
+           box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .stylish-btn:hover{
+            background: linear-gradient(to right,#5a70d8,#6646c1);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body  style="background-image: url('/static/adminbg.jpg'); background-size: cover;">
+    <center>
+        <img src="/static/adminimg.jpg" width="250" height="250">
+        <h1 style="color:black">Admin</h1>
+        <div style="margin-top: 20px;">
+            <a href="/admin/viewstocks" class="stylish-btn" style="display:block; width: 200px; margin: 10px auto;">View Stocks</a>
+            <a href="/admin/viewusers" class="stylish-btn" style="display:block; width: 200px; margin: 10px auto;">View Users</a>
+            <a href="/suggestions" class="stylish-btn" style="display:block; width: 200px; margin: 10px auto;">View FeedBacks</a>
+        </div>
+       
+    </center>
+    
+</body>
+</html>

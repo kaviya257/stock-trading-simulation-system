@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Feedback</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #d4d4f7, #6da9c8);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 40px;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-bottom: 30px;
+        }
+
+        form {
+            display: inline-block;
+            text-align: left;
+            padding: 30px;
+        }
+
+        label {
+            font-size: 1.1em;
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        input[type="email"], textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 120px;
+        }
+        .stylish-btn{
+           background: linear-gradient(to right,rgb(89, 182, 228),rgb(71, 142, 175));
+           color: whitesmoke;
+           border: none;
+           padding:12px 24px;
+           margin:10px 0;
+           border-radius: 30px;
+           font-size: 16px;
+           cursor: pointer;
+           transition: all 0.3s ease;
+           box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .stylish-btn:hover{
+            background: linear-gradient(to right,rgb(111, 172, 221),rgb(86, 171, 194));
+            transform: scale(1.05);
+        }
+
+       
+    </style>
+
+</head>
+<body  style="background-image: url('/static/existinginvestorbg.jpg'); background-size: cover;">
+    <center>
+        <h1>Leave your suggestions</h1>
+    <form method="post" action="/exist/feedback">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+        <label for="desc">Feedback:</label><br>
+        <textarea id="desc" name="desc" rows="5" cols="50" required></textarea><br><br>
+        <button type="submit" class="stylish-btn">Submit</button>
+    </form>
+    </center>
+
+    
+</body>
+</html>

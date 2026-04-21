@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Suggestions</title>
+     <style>
+        .scroll-container {
+            max-height: 500px; 
+            overflow-y: auto;
+            margin: 0 auto;
+            width: 70%;
+            background-color: None;
+            padding: 20px;
+            border-radius: 10px;
+        }
+       
+        .stylish-btn{
+           background: linear-gradient(to right,#667eea,#764ba2);
+           color:white;
+           border: none;
+           padding: 12px 24px;
+           margin: 10px 0;
+           border-radius: 30px;
+           font-size: 16px;
+           font-weight: bold;
+           text-decoration: none;
+           cursor: pointer;
+           transition: all 0.3s ease;
+           box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .stylish-btn:hover{
+            background: linear-gradient(to right,#5a70d8,#6646c1);
+            transform: scale(1.05);
+        }
+    
+    </style>
+</head>
+<body  style="background-image: url('/static/adminbg.jpg'); background-size: cover;">
+    <h1 style="text-align: center;">Investor Thoughts</h1>
+    <div class="scroll-container">
+        {% for f in feedbacks %}
+           <h1>{{f.emailid}}</h1><br>
+           <p>{{f.description}}</p><br>
+           <hr>
+        {% endfor %}   
+    </div>    
+    <div style="text-align: center;">
+        <a href="/admin"><button class="stylish-btn">Back</button></a>
+        </div>
+    
+</body>
+</html>

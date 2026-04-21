@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Stocks</title>
+    <link rel="icon" href="/static/stockicon.png">
+    <style>
+        body {
+            background-image: url('/static/usersbg.jpg');
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px;
+            padding: 30px;
+            flex-wrap: wrap;
+        }
+
+        .form-container {
+            max-width: 350px;
+            width: 80%;
+        }
+
+        .form-container table {
+            width: 80%;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        th, td {
+            border: 1px solid #333;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #3e7cb1;
+            color: white;
+        }
+
+        .stylish-btn {
+            background: linear-gradient(to right, rgb(144, 216, 232), rgb(100, 177, 227));
+            color: whitesmoke;
+            border: none;
+            padding: 12px 24px;
+            margin: 10px 0;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .stylish-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .table-container {
+            max-height: 300px;
+            overflow-y: auto;
+            flex: 1;
+            min-width: 400px;
+        }
+
+        .button-bar {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body  style="background-image: url('/static/existinginvestorbg.jpg'); background-size: cover;">
+    <h1>My Stocks</h1>
+
+    <div class="main-container">
+       
+        <div class="form-container">
+            <form id="sell-form">
+                <table>
+                    <tr>
+                        <td><label for="symbol">Symbol:</label></td>
+                        <td>
+                            <input type="text" name="symbol" list="stock_symbols" required>
+                            <datalist id="stock_symbols">
+                                {% for st in my_purchase %}
+                                    <option value="{{ st.symbol }}">
+                                {% endfor %}
+                            </datalist>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="num_shares">Number of shares:</label></td>
+                        <td><input type="number" name="num_shares" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="company">Company:</label></td>
+                        <td>
+                            <input type="text" name="company" list="company_list" required>
+                            <datalist id="company_list">
+                                {% for c in my_purchase %}
+                                    <option value="{{ c.company }}">
+                                {% endfor %}
+                            </datalist>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center;">
+                            <button type="submit" class="stylish-btn">Sell</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <!-- Table -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Company</th>
+                        <th>Number of Shares</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in my_purchase %}
+                    <tr>
+                        <td>{{ row.symbol }}</td>
+                        <td>{{ row.company }}</td>
+                        <td>{{ row.num_shares }}</td>
+                        <td>{{ row.price }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="button-bar">
+        <a href="/investor/exist"><button class="stylish-btn">Back</button></a>
+        <button onclick="window.location.reload()" class="stylish-btn">Refresh</button>
+    </div>
+    <script>
+    document.getElementById("sell-form").addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+
+        const response = await fetch("/investor/mystocks", {
+            method: "POST",
+            body: formData
+        });
+
+        const result = await response.json();
+
+        if (result.error) {
+            alert("❌ " + result.error);
+        } else {
+            alert(result.message);
+            window.location.reload();
+        }
+    });
+</script>
+
+</body>
+</html>

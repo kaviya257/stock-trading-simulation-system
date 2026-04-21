@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Remove Investor</title>
+    <style>
+        .stylish-btn{
+           background: linear-gradient(to right,pink,blueviolet);
+           color: whitesmoke;
+           border: none;
+           padding:12px 24px;
+           margin:10px 0;
+           border-radius: 30px;
+           font-size: 16px;
+           cursor: pointer;
+           transition: all 0.3s ease;
+           box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .stylish-btn:hover{
+            background: linear-gradient(to right,pink,blueviolet);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body style="background-image: url('/static/loginbg.jpg'); background-size: cover;">
+  <center>
+        <h1 style="color: aliceblue;">Remove Investor</h1>
+        <form method="post" action="/delete_user">
+        <table>
+            <tr>
+                <td style="color: aliceblue;">UserName</td>
+                <td><input type="text" name="UserName" placeholder="enter username" required></td>
+            </tr>
+             <tr>
+                <td></td>
+                <td><button type="submit" class="stylish-btn">Submit</button></td>
+            </tr>
+        </table>
+    </form>
+    </center>
+    
+</body>
+</html>

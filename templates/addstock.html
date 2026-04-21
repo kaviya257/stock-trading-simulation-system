@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ADD STOCKS</title>
+    <style>
+        .stylish-btn{
+           background: linear-gradient(to right,pink,blueviolet);
+           color: whitesmoke;
+           border: none;
+           padding:12px 24px;
+           margin:10px 0;
+           border-radius: 30px;
+           font-size: 16px;
+           cursor: pointer;
+           transition: all 0.3s ease;
+           box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .stylish-btn:hover{
+            background: linear-gradient(to right,pink,blueviolet);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body style="background-image: url('/static/loginbg.jpg'); background-size: cover;">
+    <center>
+    <h1 style="color: aliceblue;">Add Stocks</h1>
+    <form method="post" action="/admin/addstock">
+        <table>
+            <tr>
+                <td style="color: whitesmoke;">stockid</td>
+                <td><input type="number" name="stockid" placeholder="enter stock id" required></td>
+            </tr>
+            <tr>
+                <td style="color: whitesmoke;">stocksymbol</td>
+                <td><input type="text" name="stocksymbol" placeholder="enter stock symbol" required></td>
+            </tr>
+            <tr>
+                <td style="color: whitesmoke;">company</td>
+                <td><input type="text" name="company" placeholder="enter company name" required></td>
+            </tr>
+            <tr>
+                <td style="color: whitesmoke;">Price</td>
+                <td><input type="number" name="Price" placeholder="enter price" step="0.01" required></td>
+            </tr>
+            <tr>
+                <td style="color: whitesmoke;">Available_shares</td>
+                <td><input type="number" name="Available_shares" placeholder="enter available shares" step="0.01" required></td>
+            </tr>
+            <tr>
+                <td style="color: whitesmoke;">Sector</td>
+                <td><input type="text" name="Sector" placeholder="enter sector" required></td>
+            </tr>
+            <tr>
+                <td style="color: whitesmoke;">Rating</td>
+                <td><input type="number" name="Rating" placeholder="enter Rating" step="0.01" required></td>
+            </tr>
+            <tr>
+                <td><button type="submit" class="stylish-btn">Submit</button></td>
+            </tr>
+        </table>
+    </form>
+    
+</body>
+</html>
