@@ -10,7 +10,9 @@ app=FastAPI()
 app.add_middleware(SessionMiddleware,secret_key="kaviya")
 import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory=os.path.join(BASE_DIR, "templates"))
+templates.env.cache = {}
+templates.env.auto_reload = True
 app.mount("/static",StaticFiles(directory="static"),name="static")
 def connect_database():
     url = DATABASE_URL.replace("postgres://", "postgresql://")
