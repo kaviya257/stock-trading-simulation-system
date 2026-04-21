@@ -13,10 +13,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 templates = Jinja2Templates(directory=os.path.join(BASE_DIR, "templates"))
 app.mount("/static",StaticFiles(directory="static"),name="static")
 def connect_database():
-    return psycopg2.connect(
-        os.getenv("DATABASE_URL"),
-        sslmode="require"
-    )
+    return psycopg2.connect(os.environ["DATABASE_URL"])
 @app.get("/")
 def display(request:Request,error:str=""):
     return templates.TemplateResponse("login.html",{"request":request,"error":error})
