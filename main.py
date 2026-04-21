@@ -8,9 +8,10 @@ from typing import Union
 from starlette.middleware.sessions import SessionMiddleware
 app=FastAPI() 
 app.add_middleware(SessionMiddleware,secret_key="kaviya")
-templates=Jinja2Templates(directory="templates")
-app.mount("/static",StaticFiles(directory="static"),name="static")
 import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+templates = Jinja2Templates(directory=os.path.join(BASE_DIR, "templates"))
+app.mount("/static",StaticFiles(directory="static"),name="static")
 def connect_database():
     return psycopg2.connect(
         os.getenv("DATABASE_URL"),
