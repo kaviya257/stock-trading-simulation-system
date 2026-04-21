@@ -11,10 +11,11 @@ app.add_middleware(SessionMiddleware,secret_key="kaviya")
 import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 templates = Jinja2Templates(directory=os.path.join(BASE_DIR, "templates"))
-templates.env.cache = {}
-templates.env.auto_reload = True
 app.mount("/static",StaticFiles(directory="static"),name="static")
+DATABASE_URL = os.getenv("DATABASE_URL")
 def connect_database():
+    if not DATABASE_URL:
+        raise Exception("DATABASE_URL is not set in Render Environment Variables")
     url = DATABASE_URL.replace("postgres://", "postgresql://")
     return psycopg2.connect(url)
 @app.get("/")
